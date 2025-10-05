@@ -33,7 +33,6 @@ public class AuthService {
 	
 	public DatosDetalleSesion inicio(DatosIniciarSesion datos) {
 		try {
-			
 			Authentication authentication = new UsernamePasswordAuthenticationToken(datos.usuario(), datos.contraseña());
 			var usuarioAutenticado = authenticationManager.authenticate(authentication);
 			System.out.print(usuarioAutenticado);
