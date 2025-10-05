@@ -39,7 +39,7 @@ public class SecurityFilter extends OncePerRequestFilter {
 		System.out.println("uri:" + requestURI);
 		for (Pattern pattern: RUTAS_EXCLUIDAS ) {
 			System.out.println(pattern);
-			System.out.print(pattern.matcher(requestURI).matches());
+			System.out.println(pattern.matcher(requestURI).matches());
 			if(pattern.matcher(requestURI).matches()) {
 				filterChain.doFilter(request, response);
 				return;

@@ -33,9 +33,11 @@ public class AuthService {
 	
 	public DatosDetalleSesion inicio(DatosIniciarSesion datos) {
 		try {
+			System.out.println(datos);
 			Authentication authentication = new UsernamePasswordAuthenticationToken(datos.usuario(), datos.contraseña());
+			System.out.println(authentication);
 			var usuarioAutenticado = authenticationManager.authenticate(authentication);
-			System.out.print(usuarioAutenticado);
+			System.out.println(usuarioAutenticado);
 			var JWTToken = tokenService.generarToken((Usuario) usuarioAutenticado.getPrincipal());
 			return new DatosDetalleSesion("", JWTToken, Roles.COORDINADOR_COMPRAS);
 		}catch (BadCredentialsException e) {
