@@ -26,7 +26,9 @@ public class SecurityFilter extends OncePerRequestFilter {
 	@Autowired
 	private TokenService tokenService;
 	
-	private static List<Pattern> RUTAS_EXCLUIDAS= List.of();
+	private static List<Pattern> RUTAS_EXCLUIDAS= List.of(
+			Pattern.compile("^/auth/.+$")
+			);
 
 	@SuppressWarnings("null")
 	@Override
