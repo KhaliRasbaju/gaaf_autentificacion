@@ -40,8 +40,8 @@
 			return http.csrf(crsf -> crsf.disable())
 					.sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 					.authorizeHttpRequests(req -> {
-						req.requestMatchers("/auth/*").permitAll();
-						req.anyRequest().authenticated();
+						req.requestMatchers("/auth/**").permitAll();
+						req.anyRequest().permitAll();
 					})
 					.exceptionHandling(exceptions -> {
 						exceptions.authenticationEntryPoint(customAuthenticationEntryPoint);

@@ -27,7 +27,7 @@ public class SecurityFilter extends OncePerRequestFilter {
 	private TokenService tokenService;
 	
 	private static List<Pattern> RUTAS_EXCLUIDAS= List.of(
-			Pattern.compile("^/auth/.+$")
+			Pattern.compile("^/auth(/.*)?$")
 			);
 
 	@SuppressWarnings("null")
@@ -36,12 +36,16 @@ public class SecurityFilter extends OncePerRequestFilter {
 			throws ServletException, IOException {
 		var token = request.getHeader("Authorization");
 		String requestURI = request.getRequestURI();
+		System.out.println("uri:" + requestURI);
 		for (Pattern pattern: RUTAS_EXCLUIDAS ) {
+			System.out.println(pattern);
+			System.out.print(pattern.matcher(requestURI).matches());
 			if(pattern.matcher(requestURI).matches()) {
 				filterChain.doFilter(request, response);
 				return;
 			}
 		}
+		
 		if(token != null) {
 			token = token.replace("Bearer ", "");
 			System.out.println(token);
@@ -55,6 +59,7 @@ public class SecurityFilter extends OncePerRequestFilter {
 		} else {
 			//
 		}
+		
 		
 		filterChain.doFilter(request, response);
 		
