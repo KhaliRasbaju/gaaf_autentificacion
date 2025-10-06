@@ -2,8 +2,6 @@ package com.udi.gaaf.autentificacion.errors;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import org.springframework.data.mongodb.core.query.Field;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

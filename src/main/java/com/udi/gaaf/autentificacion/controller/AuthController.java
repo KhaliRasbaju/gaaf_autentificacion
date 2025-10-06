@@ -45,7 +45,4 @@ public class AuthController {
 		var detalle = service.inicio(datos);
 		return ResponseEntity.ok(detalle);
 	}
-	
-	
-	
 }
