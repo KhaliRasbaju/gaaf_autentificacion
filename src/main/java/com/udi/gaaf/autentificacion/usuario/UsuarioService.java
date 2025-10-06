@@ -1,16 +1,17 @@
 package com.udi.gaaf.autentificacion.usuario;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.beans.factory.annotation.Value;
+
+import com.udi.gaaf.autentificacion.errors.BadRequestException;
+import com.udi.gaaf.autentificacion.errors.NotFoundException;
 
 @Service
 public class UsuarioService {
 	
-	@Value("${spring.data.mongodb.uri}")
-	private String urlMongo;
-	
+
 	
 	
 	@Autowired
@@ -24,11 +25,27 @@ public class UsuarioService {
 	
 	
 	public Usuario register(DatosRegistrarUsuario datos) {
-		System.out.println("URI MONGO: " + urlMongo);
+		
+		var existe = existeUsuario(datos.correo(),datos.usuario());
+		
+		if(existe) {
+			throw new BadRequestException("Usuario ya existe");
+		}
+		
 		String contraseñaEncriptada = passwordEncoder.encode(datos.contraseña());
 		var usuario = new Usuario(datos, contraseñaEncriptada);
 		var nuevoUsuario = repository.save(usuario);
 		return nuevoUsuario;
+	}
+	
+	
+	public Boolean existeUsuario(String correo, String usuario) {
+		var usuarioCorreo = repository.findByCorreo(correo);
+		var usuarioNombre = repository.findByUsuario(usuario);
+		if(!usuarioCorreo.isPresent() || !usuarioNombre.isPresent()) {
+			return false;
+		}
+		return true;
 	}
 	
 

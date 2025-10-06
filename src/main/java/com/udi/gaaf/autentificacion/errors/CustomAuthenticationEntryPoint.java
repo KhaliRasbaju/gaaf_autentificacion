@@ -29,7 +29,7 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
         json.put("message", "Token invalido");
         
         String responseBody = new ObjectMapper().writeValueAsString(json);
-        response.getWriter().write(responseBody);
+        response.getWriter().write(responseBody);	
 		
 	}
 

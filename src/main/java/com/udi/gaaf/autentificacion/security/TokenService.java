@@ -3,7 +3,6 @@ package com.udi.gaaf.autentificacion.security;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -13,6 +12,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.udi.gaaf.autentificacion.auth.DatosDetalleSesion;
+import com.udi.gaaf.autentificacion.errors.NotTokenValidException;
 import com.udi.gaaf.autentificacion.usuario.Roles;
 import com.udi.gaaf.autentificacion.usuario.Usuario;
 
@@ -63,7 +63,7 @@ public class TokenService {
 			
 			verifier.getSubject();
 		}catch (JWTVerificationException ex) {
-			 //throw new RuntimeException("Verifire Invalido");
+			throw new NotTokenValidException("No hay token");
 		}
 		
 		if(verifier.getSubject() == null) {
@@ -86,8 +86,8 @@ public class TokenService {
 	    	 
 	    	 return decodedJWT.getClaim("id").asString();
 	    	
-	    }catch(JWTVerificationException ex) {
-	    	throw new RuntimeException();
+	    } catch(JWTVerificationException ex) {
+	    	 throw new NotTokenValidException("Token invalido o verificable");
 	    }
 	}
 }

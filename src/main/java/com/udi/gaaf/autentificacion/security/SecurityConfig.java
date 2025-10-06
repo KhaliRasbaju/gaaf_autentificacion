@@ -40,11 +40,11 @@
 			return http.csrf(crsf -> crsf.disable())
 					.sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 					.authorizeHttpRequests(req -> {
-						req.requestMatchers("/auth/*").permitAll();
+						req.requestMatchers("/auth/**").permitAll();
 						req.anyRequest().authenticated();
 					})
 					.exceptionHandling(exceptions -> {
-						//exceptions.authenticationEntryPoint(customAuthenticationEntryPoint);
+						exceptions.authenticationEntryPoint(customAuthenticationEntryPoint);
 						exceptions.accessDeniedHandler(accessDeniedHandler());
 					})
 					.addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)

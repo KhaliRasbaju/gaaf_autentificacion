@@ -10,6 +10,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import com.udi.gaaf.autentificacion.errors.NotTokenValidException;
 import com.udi.gaaf.autentificacion.usuario.Usuario;
 import com.udi.gaaf.autentificacion.usuario.UsuarioRepository;
 
@@ -27,7 +28,7 @@ public class SecurityFilter extends OncePerRequestFilter {
 	private TokenService tokenService;
 	
 	private static List<Pattern> RUTAS_EXCLUIDAS= List.of(
-			Pattern.compile("^/auth(/.*)?$")
+			Pattern.compile("^/auth/.+$")
 			);
 
 	@SuppressWarnings("null")
@@ -38,8 +39,9 @@ public class SecurityFilter extends OncePerRequestFilter {
 		String requestURI = request.getRequestURI();
 		System.out.println("uri:" + requestURI);
 		for (Pattern pattern: RUTAS_EXCLUIDAS ) {
-			System.out.println(pattern);
 			System.out.println(pattern.matcher(requestURI).matches());
+			System.out.println(pattern);
+			SecurityContextHolder.clearContext(); 
 			if(pattern.matcher(requestURI).matches()) {
 				filterChain.doFilter(request, response);
 				return;
@@ -57,7 +59,7 @@ public class SecurityFilter extends OncePerRequestFilter {
 				SecurityContextHolder.getContext().setAuthentication(autentificacion);
 			}
 		} else {
-			//
+			throw new NotTokenValidException("No hay token");
 		}
 		
 		

@@ -8,9 +8,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.security.core.Authentication;
 import com.udi.gaaf.autentificacion.security.TokenService;
 import com.udi.gaaf.autentificacion.usuario.DatosRegistrarUsuario;
-import com.udi.gaaf.autentificacion.usuario.Roles;
 import com.udi.gaaf.autentificacion.usuario.Usuario;
 import com.udi.gaaf.autentificacion.usuario.UsuarioService;
+import com.udi.gaaf.autentificacion.errors.AuthenticationException;
 
 @Service
 public class AuthService {
@@ -41,7 +41,7 @@ public class AuthService {
 			var JWTToken = tokenService.generarToken((Usuario) usuarioAutenticado.getPrincipal());
 			return JWTToken;
 		}catch (BadCredentialsException e) {
-            throw new RuntimeException("Usuario o contraseña incorrectos"); 
+            throw new AuthenticationException("Usuario o contraseña incorrectos"); 
         } catch (Exception e) {
             throw new RuntimeException("Error en la autenticación", e);
         }
