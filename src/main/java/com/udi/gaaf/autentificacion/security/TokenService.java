@@ -12,6 +12,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.udi.gaaf.autentificacion.auth.DatosDetalleSesion;
 import com.udi.gaaf.autentificacion.usuario.Roles;
 import com.udi.gaaf.autentificacion.usuario.Usuario;
 
@@ -25,17 +26,19 @@ public class TokenService {
 		return LocalDateTime.now().plusHours(2).toInstant(ZoneOffset.of("-05:00"));
 	}
 	
-	public String generarToken(Usuario usuario) {
+	public DatosDetalleSesion generarToken(Usuario usuario) {
 		try {
 			Algorithm algorithm = Algorithm.HMAC256(secret);
 			Roles role = usuario.getRol();
-			return JWT.create()
+			String token = JWT.create()
 					.withIssuer("GAAF")
 					.withSubject(usuario.getNombre())
 					.withClaim("id", usuario.getId())
 					.withClaim("rol", role.toString())
 					.withExpiresAt(generarFechaExpiracion())
 					.sign(algorithm);
+			
+			return new DatosDetalleSesion(usuario.getNombre(), token, role);
 			
 		}catch(Exception ex) {
 			 throw new RuntimeException(ex);

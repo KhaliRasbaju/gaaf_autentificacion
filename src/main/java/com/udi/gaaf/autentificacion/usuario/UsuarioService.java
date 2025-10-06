@@ -30,5 +30,7 @@ public class UsuarioService {
 		var nuevoUsuario = repository.save(usuario);
 		return nuevoUsuario;
 	}
+	
+
 
 }

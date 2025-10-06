@@ -39,11 +39,13 @@ public class AuthService {
 			var usuarioAutenticado = authenticationManager.authenticate(authentication);
 			System.out.println(usuarioAutenticado);
 			var JWTToken = tokenService.generarToken((Usuario) usuarioAutenticado.getPrincipal());
-			return new DatosDetalleSesion("", JWTToken, Roles.COORDINADOR_COMPRAS);
+			return JWTToken;
 		}catch (BadCredentialsException e) {
             throw new RuntimeException("Usuario o contraseña incorrectos"); 
         } catch (Exception e) {
             throw new RuntimeException("Error en la autenticación", e);
         }
 	}
+	
+	
 }

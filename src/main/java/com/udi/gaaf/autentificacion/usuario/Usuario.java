@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,7 +18,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Document(collation = "usuarios")
+@Document(collection  = "usuario")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -25,11 +26,13 @@ import lombok.Setter;
 public class Usuario implements UserDetails{
 	@Id
 	private String id;
+	@Field("usuario")
 	private String usuario;
 	private String nombre;
 	private String correo;
 	private String telfono;
-	private String contraseña;
+	@Field("contrasena")
+	private String contrasena;
 	private Boolean activo;
 	
 	
@@ -47,7 +50,7 @@ public class Usuario implements UserDetails{
 		this.nombre = datos.nombre();
 		this.correo = datos.correo();
 		this.telfono = datos.telefono();
-		this.contraseña = contraseñaEncriptada;
+		this.contrasena = contraseñaEncriptada;
 		this.activo = true;
 		this.rol = datos.rol();
 		this.notificacion= new ArrayList<>();
@@ -67,7 +70,7 @@ public class Usuario implements UserDetails{
 
 	@Override
 	public String getPassword() {
-		return contraseña;
+		return contrasena;
 	}
 
 
@@ -76,4 +79,15 @@ public class Usuario implements UserDetails{
 	public String getUsername() {
 		return usuario;
 	}
+   @Override
+    public boolean isAccountNonExpired() { return true; }
+
+    @Override
+    public boolean isAccountNonLocked() { return true; }
+
+    @Override
+    public boolean isCredentialsNonExpired() { return true; }
+
+    @Override
+    public boolean isEnabled() { return activo; }
 }

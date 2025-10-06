@@ -2,6 +2,8 @@ package com.udi.gaaf.autentificacion.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +14,7 @@ import com.udi.gaaf.autentificacion.auth.DatosDetalleRegistro;
 import com.udi.gaaf.autentificacion.auth.DatosDetalleSesion;
 import com.udi.gaaf.autentificacion.auth.DatosIniciarSesion;
 import com.udi.gaaf.autentificacion.usuario.DatosRegistrarUsuario;
+import com.udi.gaaf.autentificacion.usuario.Usuario;
 
 @RestController
 @RequestMapping("/auth")
@@ -34,4 +37,7 @@ public class AuthController {
 		var detalle = service.inicio(datos);
 		return ResponseEntity.ok(detalle);
 	}
+	
+	
+	
 }
