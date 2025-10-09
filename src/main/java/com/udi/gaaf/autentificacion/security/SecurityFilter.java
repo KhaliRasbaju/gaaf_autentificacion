@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.udi.gaaf.autentificacion.errors.NotTokenValidException;
-import com.udi.gaaf.autentificacion.usuario.Usuario;
 import com.udi.gaaf.autentificacion.usuario.UsuarioRepository;
 
 import jakarta.servlet.FilterChain;

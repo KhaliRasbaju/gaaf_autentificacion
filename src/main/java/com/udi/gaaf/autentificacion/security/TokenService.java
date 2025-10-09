@@ -52,6 +52,7 @@ public class TokenService {
 		if(token == null) {
 			throw new RuntimeException();
 		}
+		
 		DecodedJWT verifier = null;
 		
 		try {
@@ -62,7 +63,7 @@ public class TokenService {
 					.verify(token);
 			
 			verifier.getSubject();
-		}catch (JWTVerificationException ex) {
+		} catch (JWTVerificationException ex) {
 			throw new NotTokenValidException("No hay token");
 		}
 		
@@ -73,6 +74,7 @@ public class TokenService {
 	}
 	
 	public String getUsuarioId(String token) {
+		
 	    if (token == null) {
 	    	 throw new IllegalArgumentException("El token no puede ser nulo");
         }
@@ -86,7 +88,7 @@ public class TokenService {
 	    	 
 	    	 return decodedJWT.getClaim("id").asString();
 	    	
-	    } catch(JWTVerificationException ex) {
+	    } catch (JWTVerificationException ex) {
 	    	 throw new NotTokenValidException("Token invalido o verificable");
 	    }
 	}

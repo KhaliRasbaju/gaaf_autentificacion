@@ -26,14 +26,12 @@
 	@Configuration
 	@EnableWebSecurity
 	public class SecurityConfig {
-	
 		
 		@Autowired
 		private SecurityFilter securityFilter;
 		
 		@Autowired
 		private CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
-		
 		
 		@Bean
 		public SecurityFilterChain secureFilterChain(HttpSecurity http) throws Exception{
@@ -50,8 +48,6 @@
 					.addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
 					.build();
 		}
-		
-		
 		
 		@Bean 
 		public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception{
@@ -77,6 +73,5 @@
 		            response.getWriter().flush();
 			};
 		}
-		
 		
 	}

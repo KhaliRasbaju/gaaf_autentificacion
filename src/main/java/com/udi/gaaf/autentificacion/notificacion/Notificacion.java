@@ -11,7 +11,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-@Document(collation = "notificacion")
+@Document(collection = "notificacion")
 @Getter
 @Setter
 @EqualsAndHashCode(of = "id")

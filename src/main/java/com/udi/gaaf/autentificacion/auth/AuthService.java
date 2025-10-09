@@ -24,12 +24,10 @@ public class AuthService {
 	@Autowired
 	private TokenService tokenService;
 	
-	
 	public DatosDetalleRegistro registrar(DatosRegistrarUsuario datos) {
 		Usuario usuario = usuarioService.register(datos);
 		return new DatosDetalleRegistro(usuario.getUsuario(), usuario.getCorreo(),usuario.getNombre(), usuario.getTelfono(), usuario.getRol() );
 	}
-	
 	
 	public DatosDetalleSesion inicio(DatosIniciarSesion datos) {
 		try {
@@ -40,12 +38,10 @@ public class AuthService {
 			System.out.println(usuarioAutenticado);
 			var JWTToken = tokenService.generarToken((Usuario) usuarioAutenticado.getPrincipal());
 			return JWTToken;
-		}catch (BadCredentialsException e) {
+		} catch (BadCredentialsException e) {
             throw new AuthenticationException("Usuario o contraseña incorrectos"); 
         } catch (Exception e) {
             throw new RuntimeException("Error en la autenticación", e);
         }
 	}
-	
-	
 }
