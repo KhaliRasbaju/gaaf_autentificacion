@@ -36,7 +36,7 @@ public class Usuario implements UserDetails{
 	
 	private String correo;
 	
-	private String telfono;
+	private String telefono;
 	
 	@Field("contrasena")
 	private String contrasena;
@@ -51,7 +51,7 @@ public class Usuario implements UserDetails{
 		this.usuario = datos.usuario();
 		this.nombre = datos.nombre();
 		this.correo = datos.correo();
-		this.telfono = datos.telefono();
+		this.telefono = datos.telefono();
 		this.contrasena = contraseñaEncriptada;
 		this.activo = true;
 		this.rol = datos.rol();

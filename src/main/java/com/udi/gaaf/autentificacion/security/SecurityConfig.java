@@ -39,6 +39,7 @@
 					.sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 					.authorizeHttpRequests(req -> {
 						req.requestMatchers("/auth/**").permitAll();
+						req.requestMatchers("/usuario/**").permitAll();
 						req.anyRequest().authenticated();
 					})
 					.exceptionHandling(exceptions -> {

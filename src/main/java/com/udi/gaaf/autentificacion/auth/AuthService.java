@@ -26,7 +26,7 @@ public class AuthService {
 	
 	public DatosDetalleRegistro registrar(DatosRegistrarUsuario datos) {
 		Usuario usuario = usuarioService.register(datos);
-		return new DatosDetalleRegistro(usuario.getUsuario(), usuario.getCorreo(),usuario.getNombre(), usuario.getTelfono(), usuario.getRol() );
+		return new DatosDetalleRegistro(usuario.getUsuario(), usuario.getCorreo(),usuario.getNombre(), usuario.getTelefono(), usuario.getRol() );
 	}
 	
 	public DatosDetalleSesion inicio(DatosIniciarSesion datos) {
