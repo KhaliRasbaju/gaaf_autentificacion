@@ -43,7 +43,7 @@
 						req.anyRequest().authenticated();
 					})
 					.exceptionHandling(exceptions -> {
-						exceptions.authenticationEntryPoint(customAuthenticationEntryPoint);
+						//exceptions.authenticationEntryPoint(customAuthenticationEntryPoint);
 						exceptions.accessDeniedHandler(accessDeniedHandler());
 					})
 					.addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
