@@ -16,7 +16,7 @@ import com.udi.gaaf.autentificacion.common.DatosDetalleResponse;
 import com.udi.gaaf.autentificacion.errors.NotRequestBodyException;
 import com.udi.gaaf.autentificacion.usuario.DatosCambiarCredenciales;
 import com.udi.gaaf.autentificacion.usuario.DatosDetalleUsuario;
-import com.udi.gaaf.autentificacion.usuario.DatosRegistrarUsuario;
+import com.udi.gaaf.autentificacion.usuario.DatosEditarUsuario;
 import com.udi.gaaf.autentificacion.usuario.UsuarioService;
 
 import jakarta.validation.Valid;
@@ -42,7 +42,7 @@ public class UsuarioController {
 	}
 	
 	@PutMapping("/editar/{id}")
-	public  ResponseEntity<DatosDetalleUsuario> editar(@RequestBody(required = false) @Valid DatosRegistrarUsuario datos, @PathVariable String id) {
+	public  ResponseEntity<DatosDetalleUsuario> editar(@RequestBody(required = false) @Valid DatosEditarUsuario datos, @PathVariable String id) {
 		if(datos == null) {
 			throw new NotRequestBodyException("Se requiere el body");
 		}

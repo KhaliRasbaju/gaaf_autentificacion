@@ -50,7 +50,7 @@ public class UsuarioService {
 	}
 	
 	
-	public DatosDetalleUsuario editar(DatosRegistrarUsuario datos, String id) {
+	public DatosDetalleUsuario editar(DatosEditarUsuario datos, String id) {
 		var usuario = obtenerUsuarioPorId(id);
 		if(usuario.getNombre() != datos.nombre()) usuario.setNombre(datos.nombre());
 		if(usuario.getUsuario() != datos.usuario()) usuario.setUsuario(datos.usuario());
@@ -62,13 +62,19 @@ public class UsuarioService {
 	}
 	
 	public DatosDetalleResponse cambiarContrasenaPorId(DatosCambiarCredenciales datos, String id) {
-		var usuario = obtenerUsuarioPorId(id);
-		if(!passwordEncoder.matches(datos.contraseña(), usuario.getContrasena())) {
-			var contraseñaEncriptada = passwordEncoder.encode(datos.contraseña());
-			usuario.setContrasena(contraseñaEncriptada);			
-			repository.save(usuario);
+		try {
+			
+			var usuario = obtenerUsuarioPorId(id);
+			if(!passwordEncoder.matches(datos.contraseña(), usuario.getContrasena())) {
+				var contraseñaEncriptada = passwordEncoder.encode(datos.contraseña());
+				usuario.setContrasena(contraseñaEncriptada);			
+				repository.save(usuario);
+			}
+			return new DatosDetalleResponse(200, "Credenciales cambiadas correctamente");
+		}catch (Exception e) {
+			System.out.println("Error tipo: " +e);
+			throw new BadRequestException("Error");
 		}
-		return new DatosDetalleResponse(200, "Credenciales cambiadas correctamente");
 	}
 
 	public DatosDetalleUsuario obtenerPorId(String id) {
