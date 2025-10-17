@@ -30,6 +30,7 @@ public class SecurityFilter extends OncePerRequestFilter {
 			Pattern.compile("^/auth/.+$"),
 			Pattern.compile("^/usuario(?:/.*)?$"),
 			Pattern.compile("^/v3/api-docs(/.*)?$"),
+			Pattern.compile("^/docs(/.*)?$"),
 			Pattern.compile("^/swagger-ui\\.html$"),
 			Pattern.compile("^/swagger-ui(/.*)?$")
 			);
