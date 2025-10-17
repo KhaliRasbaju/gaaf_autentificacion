@@ -40,6 +40,7 @@
 					.authorizeHttpRequests(req -> {
 						req.requestMatchers("/auth/**").permitAll();
 						req.requestMatchers("/usuario/**").permitAll();
+						 req.requestMatchers("/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**").permitAll();
 						req.anyRequest().authenticated();
 					})
 					.exceptionHandling(exceptions -> {

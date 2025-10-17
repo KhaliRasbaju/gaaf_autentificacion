@@ -28,7 +28,10 @@ public class SecurityFilter extends OncePerRequestFilter {
 	
 	private static List<Pattern> RUTAS_EXCLUIDAS= List.of(
 			Pattern.compile("^/auth/.+$"),
-			Pattern.compile("^/usuario(?:/.*)?$")
+			Pattern.compile("^/usuario(?:/.*)?$"),
+			Pattern.compile("^/v3/api-docs(/.*)?$"),
+			Pattern.compile("^/swagger-ui\\.html$"),
+			Pattern.compile("^/swagger-ui(/.*)?$")
 			);
 
 	@SuppressWarnings("null")
