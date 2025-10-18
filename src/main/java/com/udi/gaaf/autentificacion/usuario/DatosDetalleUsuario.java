@@ -1,17 +1,21 @@
 package com.udi.gaaf.autentificacion.usuario;
 
 public record DatosDetalleUsuario(
-	 String usuario,
+		
 	
-	 String nombre,
+	String id,
+		
+	String usuario,
 	
-	 String correo,
+	String nombre,
 	
-	 String telfono,
+	String correo,
 	
-	 Boolean activo,
+	String telfono,
 	
-	 Roles rol
+	Boolean activo,
+	
+	Roles rol
 ) {
 
 }

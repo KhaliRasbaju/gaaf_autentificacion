@@ -33,7 +33,7 @@ public class UsuarioService {
 	}
 
 	private DatosDetalleUsuario detalleUsuario( Usuario usuario) {
-		return new DatosDetalleUsuario(usuario.getUsuario(), usuario.getNombre(), usuario.getCorreo(), usuario.getTelefono(), usuario.getActivo(), usuario.getRol());
+		return new DatosDetalleUsuario(usuario.getId(),usuario.getUsuario(), usuario.getNombre(), usuario.getCorreo(), usuario.getTelefono(), usuario.getActivo(), usuario.getRol());
 	}
 	
 	
