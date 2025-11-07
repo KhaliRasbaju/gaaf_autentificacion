@@ -11,9 +11,11 @@ import com.udi.gaaf.autentificacion.usuario.Roles;
  * @param usuario nombre de usuario autenticado
  * @param token token JWT generado para la sesión del usuario
  * @param rol rol asignado al usuario dentro del sistema
+ * @param id identificación del usario
  */
 public record DatosDetalleSesion(
     String usuario,
     String token,
-    Roles rol
+    Roles rol,
+    String id
 ) {}

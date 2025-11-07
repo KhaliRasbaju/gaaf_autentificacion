@@ -69,7 +69,7 @@ public class TokenService {
                     .withExpiresAt(generarFechaExpiracion())
                     .sign(algorithm);
 
-            return new DatosDetalleSesion(usuario.getNombre(), token, role);
+            return new DatosDetalleSesion(usuario.getNombre(), token, role, usuario.getId());
 
         } catch (Exception ex) {
             throw new RuntimeException("Error al generar el token JWT.", ex);
