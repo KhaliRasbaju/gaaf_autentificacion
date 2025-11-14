@@ -1,11 +1,10 @@
 package com.udi.gaaf.autentificacion.notificacion;
 
 import java.time.LocalDateTime;
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-
+import com.udi.gaaf.autentificacion.usuario.Usuario;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -33,6 +32,8 @@ public class Notificacion {
 	private String remitente;
 	/** Estado de la notificación. */
 	private EstadoNotificacion estado;
+	/** Relacion con usuarios **/
+	private  Usuario usuario;
 	
 
 }

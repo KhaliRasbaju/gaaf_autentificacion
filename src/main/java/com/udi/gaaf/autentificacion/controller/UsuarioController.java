@@ -67,7 +67,7 @@ public class UsuarioController {
      *
      * @param datos datos del usuario a modificar
      * @param id identificador único del usuario
-     * @return detalles del usuario actualizado
+     * @return respuesta de exito
      * @throws NotRequestBodyException si el cuerpo de la solicitud está vacío
      */
     @PutMapping("/editar/{id}")

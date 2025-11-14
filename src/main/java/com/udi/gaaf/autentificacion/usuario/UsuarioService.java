@@ -96,7 +96,7 @@ public class UsuarioService {
      *
      * @param datos record con la información de edición.
      * @param id identificador del usuario a editar.
-     * @return record {@link DatosDetalleUsuario} con los nuevos datos del usuario.
+     * @return record {@link DatosDetalleResponse} con el mensaje de operación exitosa.
      * @throws NotFoundException si no se encuentra el usuario.
      */
     public DatosDetalleResponse editar(DatosEditarUsuario datos, String id) {
