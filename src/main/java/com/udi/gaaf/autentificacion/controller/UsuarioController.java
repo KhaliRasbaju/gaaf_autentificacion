@@ -71,7 +71,7 @@ public class UsuarioController {
      * @throws NotRequestBodyException si el cuerpo de la solicitud está vacío
      */
     @PutMapping("/editar/{id}")
-    public ResponseEntity<DatosDetalleUsuario> editar(
+    public ResponseEntity<DatosDetalleResponse> editar(
             @RequestBody(required = false) @Valid DatosEditarUsuario datos,
             @PathVariable String id) {
         if (datos == null) {

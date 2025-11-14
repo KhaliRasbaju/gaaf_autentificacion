@@ -99,17 +99,20 @@ public class UsuarioService {
      * @return record {@link DatosDetalleUsuario} con los nuevos datos del usuario.
      * @throws NotFoundException si no se encuentra el usuario.
      */
-    public DatosDetalleUsuario editar(DatosEditarUsuario datos, String id) {
-        var usuario = obtenerUsuarioPorId(id);
-
-        if (!usuario.getNombre().equals(datos.nombre())) usuario.setNombre(datos.nombre());
-        if (!usuario.getUsuario().equals(datos.usuario())) usuario.setUsuario(datos.usuario());
-        if (!usuario.getCorreo().equals(datos.correo())) usuario.setCorreo(datos.correo());
-        if (!usuario.getTelefono().equals(datos.telefono())) usuario.setTelefono(datos.telefono());
-        if (usuario.getRol() != datos.rol()) usuario.setRol(datos.rol());
-
-        repository.save(usuario);
-        return detalleUsuario(usuario);
+    public DatosDetalleResponse editar(DatosEditarUsuario datos, String id) {
+    	
+    	try {
+    		var usuario = obtenerUsuarioPorId(id);
+    		if (!usuario.getNombre().equals(datos.nombre())) usuario.setNombre(datos.nombre());
+    		if (!usuario.getUsuario().equals(datos.usuario())) usuario.setUsuario(datos.usuario());
+    		if (!usuario.getCorreo().equals(datos.correo())) usuario.setCorreo(datos.correo());
+    		if (!usuario.getTelefono().equals(datos.telefono())) usuario.setTelefono(datos.telefono());
+    		if (usuario.getRol() != datos.rol()) usuario.setRol(datos.rol());    		
+    		repository.save(usuario);
+    		return new DatosDetalleResponse(200, "Usuario actualizado correctamente");
+		} catch (Exception e) {
+			throw new BadRequestException("Error al actualizar el usuario");
+		}
     }
 
     /**
